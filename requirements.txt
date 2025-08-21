@@ -1,0 +1,9 @@
+Django
+python-whois
+tldextract
+beautifulsoup4
+lxml
+scikit-learn
+pandas
+joblib
+python-magic
