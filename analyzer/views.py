@@ -1,14 +1,14 @@
 from django.shortcuts import render
-from .utils import analyze_email
+from .models import EmailSample
 
+def home(request):
+    total_emails = EmailSample.objects.count()
+    phishing_emails = EmailSample.objects.filter(is_phishing=True).count()
+    legitimate_emails = EmailSample.objects.filter(is_phishing=False).count()
 
-def analyze_view(request):
-    if request.method == "POST":
-        raw_text = request.POST.get("raw_text", "")
-        eml_file = request.FILES.get("eml_file")
-        eml_bytes = eml_file.read() if eml_file else None
-
-        result = analyze_email(raw_text, eml_bytes)
-        return render(request, "analyzer/result.html", {"result": result})
-
-    return render(request, "analyzer/upload.html")
+    context = {
+        'total_emails': total_emails,
+        'phishing_emails': phishing_emails,
+        'legitimate_emails': legitimate_emails,
+    }
+    return render(request, 'analyzer/home.html', context)

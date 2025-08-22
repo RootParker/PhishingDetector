@@ -1,0 +1,66 @@
+{% extends 'analyzer/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Welcome to PhishingDetector</h1>
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 p-3 bg-primary text-white">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-envelope-fill fs-1 me-3"></i>
+                    <div>
+                        <h5>Total Emails</h5>
+                        <h3>{{ total_emails }}</h3>
+                        <div class="progress mt-2" style="height: 5px;">
+                            <div class="progress-bar bg-light" role="progressbar"
+                                 style="width: 100%;"
+                                 aria-valuenow="{{ total_emails }}" aria-valuemin="0" aria-valuemax="{{ total_emails }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 p-3 bg-danger text-white">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-exclamation-triangle-fill fs-1 me-3"></i>
+                    <div>
+                        <h5>Phishing Emails</h5>
+                        <h3>{{ phishing_emails }}</h3>
+                        <div class="progress mt-2" style="height: 5px;">
+                            <div class="progress-bar bg-light" role="progressbar"
+                                 style="width: {{ phishing_pct }}%;"
+                                 aria-valuenow="{{ phishing_emails }}" aria-valuemin="0" aria-valuemax="{{ total_emails }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 p-3 bg-success text-white">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-check-circle-fill fs-1 me-3"></i>
+                    <div>
+                        <h5>Legitimate Emails</h5>
+                        <h3>{{ legitimate_emails }}</h3>
+                        <div class="progress mt-2" style="height: 5px;">
+                            <div class="progress-bar bg-light" role="progressbar"
+                                 style="width: {{ legitimate_pct }}%;"
+                                 aria-valuenow="{{ legitimate_emails }}" aria-valuemin="0" aria-valuemax="{{ total_emails }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
